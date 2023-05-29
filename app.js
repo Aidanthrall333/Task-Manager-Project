@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const connectDB = require("./connect");
-const port = 5000;
+const port = 5001;
 const appName = "Task Manager";
 
 

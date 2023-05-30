@@ -87,9 +87,10 @@ class httpLibrary {
   
   
 const newLibrary = new httpLibrary();
+const completedList = [];
 // Listener for the HTML buttons
 window.addEventListener("DOMContentLoaded", async () => {
-  
+
   /* Post Handler*/
   document.getElementById("add").addEventListener("click", async (event) => {
     const item = document.getElementById("listitem").value; // sets item to the inserted value
@@ -207,10 +208,12 @@ window.addEventListener("DOMContentLoaded", async () => {
           console.log("Began Completing Item");
           try {
               await newLibrary.put(toEdit);
+              completedList.push("testing");
           } catch (err) {
               console.log("Complete did not work: ", err);
           }
           GetList();
+          UpdateCompleted();
       }
   });
 
@@ -248,4 +251,16 @@ async function GetList() {
   output += "</ul>";
   document.getElementById("list").innerHTML = output;
 }
+
+async function UpdateCompleted() {
+  let output = "<ul>";
+  for(const task of completedList) {
+    output += "<li>" + task + "</li>";
+  }
+  output += "</ul>";
+
+  document.getElementById("completed-list").innerHTML = output;
+}
+
 GetList();
+UpdateCompleted();

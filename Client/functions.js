@@ -76,6 +76,7 @@ class httpLibrary {
       } catch (err) {
         console.log("Post did not work: ", err);
       }
+      GetList()
     });
   
     /* Delete Handler*/
@@ -90,6 +91,7 @@ class httpLibrary {
           } catch (err) {
             console.log("Delete did not work: ", err);
           }
+          GetList()
         }
       });
   });
@@ -99,7 +101,6 @@ class httpLibrary {
     // This will get the data from list.json
     const tasks = await newLibrary.get(); // Fetches from list
     let output = "<ul>";
-    if (tasks.task.length === 0) return;
     for (const item of tasks.task) {
       output += 
         `<li>

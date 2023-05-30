@@ -43,7 +43,7 @@ app.get("/tm/v0/tasks/:id", async (req, res) => {
       res.status(500).json({ msg: error });
     }
   });
-  
+
 app.delete("/tm/v0/tasks/:id", async (req, res) => {
     try {
       const { id } = req.params;
@@ -53,6 +53,18 @@ app.delete("/tm/v0/tasks/:id", async (req, res) => {
       console.log("Error deleting task: ", error);
       res.status(500).json({ msg: error });
     }
+  });
+
+  app.put("/tm/v0/tasks/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const task = await tasks.findByIdAndUpdate(id, req.body);
+        console.log("Updated task: ", task);
+        res.status(200).json({ task });
+      } catch (error) {
+        console.log("Error updating task: ", error);
+        res.status(500).json({ msg: error });
+      }
   });
 
 // Start the Server

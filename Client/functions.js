@@ -41,6 +41,7 @@ class httpLibrary {
         console.log("Error: ", exception);
       }
     }
+    // Finished
     async delete(id) {
         try {
             const taskData = { _id: id }
@@ -56,11 +57,33 @@ class httpLibrary {
             console.log("Did not delete properly on front end, ", error)
         }
     }
+    // TODO
+    async put(id, putData){
+        try{
+            const putID = { _id: id};
+            const changedData = { name: putData }
+            const putMethod = {
+                method: 'PUT',
+                headers: {"content-type": "application/json"},
+                body: JSON.stringify(changedData)
+            }
+            let response = await fetch(`/tm/v0/tasks/${id}`, putMethod);
+            //CONSOLE LOGGING PURPOSES
+            let data = await response.json();
+            console.log(data);
+            //CONSOLE LOGGING PURPOSES
+            return response;
+        }
+        catch(exception){
+            console.log(exception.toString());
+        }
+    }
   }
   
   const newLibrary = new httpLibrary();
   // Listener for the HTML buttons
   window.addEventListener("DOMContentLoaded", async () => {
+    
     /* Post Handler*/
     document.getElementById("add").addEventListener("click", async (event) => {
       const item = document.getElementById("listitem").value; // sets item to the inserted value
@@ -94,6 +117,45 @@ class httpLibrary {
           GetList()
         }
       });
+
+    /* Put Handler*/
+    document.getElementById("list").addEventListener("click", async (event) => {
+        const button = event.target;
+        if (button.classList.contains("edit-button")) {
+            event.preventDefault();
+            
+            console.log("Began editing element");
+
+          /*Creation of new input element to edit name*/
+            const input = document.createElement('input'); 
+            input.type = 'text'; 
+            input.placeholder = 'Enter New Name'; 
+            button.appendChild(input);
+            
+
+          /*Creation of button to confirm edit */
+            const confirm = document.createElement('button'); 
+            confirm.type = 'submit'; 
+            confirm.class = 'confirm-button'; 
+            confirm.innerText = 'Confirm';
+            const toEdit = button.getAttribute("data-id"); // Gets the task's id number
+            button.appendChild(confirm);
+            console.log(toEdit);
+
+             /* Event Listener for the confirm button */
+            confirm.addEventListener('click', async (event) => {
+                const newName = input.value; 
+                try {
+                    await newLibrary.put(toEdit, newName);
+                    console.log('Put correctly');
+                    GetList();
+                } 
+                catch (error) {
+                console.log('Error putting:', error);
+                }
+            });
+        }
+      });
   });
   
   /* Gets List From DB */
@@ -107,6 +169,7 @@ class httpLibrary {
             <div>
                 <p>${item.name}</p> 
                 <button type = "submit" class="delete-button" data-id = ${item._id}> Delete </button>
+                <button type = "submit" class="edit-button" data-id = ${item._id}> Edit </button>
             </div>
         </li>`;
     }

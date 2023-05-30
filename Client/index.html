@@ -5,26 +5,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Simple List</title>
+  <title>Task Manager</title>
 </head>
 <body>
   <div class="page-area">
-    <h1>Task Manager</h1>
-    <form>
-      <section>
-        <input type="text"
-        name="listitem"
-        id="listitem"
-        autocomplete="false"
-        />
-        <div id = "response"></div>
-      </section>
+    <div class="title-area">
+      <h1 class="page-title">Task Manager</h1>
+    </div>
+    <div class="response-area" id = "response"></div>
+    <form class="form-area">
+      <input type="text"
+      class="list-add"
+      placeholder="Enter your task here!"
+      name="listitem"
+      id="listitem"
+      autocomplete="off"
+      />
       <button type="submit" class="add-btn" id = "add">Add</button>
     </form>
-    <div class="result"></div>
-  </div>
-  <div id = "list">
-
+    <h3 class="list-title">On my list</h3>
+    <div class="list-area" id = "list">
+    </div>
   </div>
   <script src="functions.js"></script>
 </body>

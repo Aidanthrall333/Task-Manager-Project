@@ -109,8 +109,22 @@ window.addEventListener("DOMContentLoaded", async () => {
     GetList()
   });
 
-  /* Delete Handler*/
+  /* Delete Handlers*/
   document.getElementById("list").addEventListener("click", async (event) => {
+      const button = event.target;
+      if (button.classList.contains("delete-button")) {
+        console.log("Deleted element");
+        const toDelete = button.getAttribute("data-id");
+        console.log(toDelete);
+        try {
+          await newLibrary.delete(toDelete);
+        } catch (err) {
+          console.log("Delete did not work: ", err);
+        }
+        GetList()
+      }
+    });
+    document.getElementById("completed-list").addEventListener("click", async (event) => {
       const button = event.target;
       if (button.classList.contains("delete-button")) {
         console.log("Deleted element");
@@ -208,12 +222,10 @@ window.addEventListener("DOMContentLoaded", async () => {
           console.log("Began Completing Item");
           try {
               await newLibrary.put(toEdit);
-              completedList.push("testing");
           } catch (err) {
               console.log("Complete did not work: ", err);
           }
           GetList();
-          UpdateCompleted();
       }
   });
 
@@ -224,6 +236,7 @@ async function GetList() {
   // This will get the data from list.json
   const tasks = await newLibrary.get(); // Fetches from list
   let output = "<ul>";
+  let outputC = "<ul>";
   for (const item of tasks.task) {
       if(item.completed == false){
           output += 
@@ -237,30 +250,19 @@ async function GetList() {
       </li>`;
       }
       else {
-          output += 
+          outputC += 
       `<li>
           <div class = "item-list">
               <p style="color: red">${item.name}</p> 
-              <button type = "submit" class="complete-button" data-id = ${item._id}> Complete </button>
               <button type = "submit" class="delete-button" data-id = ${item._id}> Delete </button>
-              <button type = "submit" class="edit-button" data-id = ${item._id}> Edit </button>
           </div>
       </li>`;
       }
   }
   output += "</ul>";
+  outputC += "</ul>";
   document.getElementById("list").innerHTML = output;
-}
-
-async function UpdateCompleted() {
-  let output = "<ul>";
-  for(const task of completedList) {
-    output += "<li>" + task + "</li>";
-  }
-  output += "</ul>";
-
-  document.getElementById("completed-list").innerHTML = output;
+  document.getElementById("completed-list").innerHTML = outputC;
 }
 
 GetList();
-UpdateCompleted();

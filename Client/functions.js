@@ -144,20 +144,21 @@ window.addEventListener("DOMContentLoaded", async () => {
       const button = event.target;
       button.hidden = true;
       
+      /* Checks if the button.classList */
       if (button.classList.contains("edit-button")) {
         event.preventDefault();
         console.log("Began editing element");
     
-        /* Creation of container element */
-        const container = document.createElement('div');
-        container.classList.add('edit-container');
+        /* Creation of parent div element */
+        const div= document.createElement('div');
+        div.classList.add('edit-container');
     
         /* Creation of new input element to edit name */
         const input = document.createElement('input');
         input.type = 'text';
         input.placeholder = 'Enter New Name';
     
-        /* Handle click event on the input to prevent propagation */
+        /* Handle click event on the input to prevent it from disappearing */
         input.addEventListener('click', (event) => {
           event.stopPropagation();
         });
@@ -176,17 +177,17 @@ window.addEventListener("DOMContentLoaded", async () => {
         form.appendChild(input);
         form.appendChild(confirm);
     
-        /* Append the form element to the container element */
-        container.appendChild(form);
+        /* Append the form element to the recently created div element */
+        div.appendChild(form);
     
-        /* Append the container element to the parent element */
+        /* Append the div element to the parent element */
         const parentElement = button.parentElement;
-        parentElement.appendChild(container);
+        parentElement.appendChild(div);
         console.log(toEdit);
     
         /* Event Listener for the form submission */
         form.addEventListener('submit', async (event) => {
-          event.preventDefault(); // Prevent form submission
+          event.preventDefault(); 
           const newName = input.value;
           try {
             await newLibrary.put(toEdit, newName);
@@ -196,8 +197,8 @@ window.addEventListener("DOMContentLoaded", async () => {
           } catch (error) {
             console.log('Error putting:', error);
           }
-          /* Remove the container element */
-          parentElement.removeChild(container);
+          /* Remove the div element */
+          parentElement.removeChild(div);
         });
       } else if (button.classList.contains("complete-button")) {
         const toEdit = button.getAttribute("data-id");

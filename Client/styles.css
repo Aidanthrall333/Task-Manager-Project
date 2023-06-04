@@ -24,24 +24,34 @@ body{
   flex-direction: row;
   justify-content: center;
 }
+
 .list-add{
+  text-align: center;
+  font-family: Arial, sans-serif;
   width: 500px;
   height: 50px;
-  font-size: 40px;
-  color: #5c6274;
-  background-color: #F5F0BB;
+  font-size: 20px;
+  color: #08470e;
+  font-style: oblique;
+  background-color: #d0d1cf;
+}
+.list-add::placeholder{
+  opacity: .4;
 }
 .input:-webkit-autofill{
   font-size: 40px;
-  color: #5c6274;
+  color: #65745c;
   background-color: #F5F0BB;
 }
 .add-btn{
-  width: 100px;
+  margin-left: 20px;
+  width: 80px;
   font-size: 20px;
   font-weight: bold;
-  color: #549C30;
-  background-color: #EEEEEE;
+  color: white;
+  background-color: green;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 50px;
 }
 .add-btn:hover{
   color:#EEEEEE;
@@ -62,6 +72,7 @@ body{
   transition-duration: .5s;
 }
 div.scroll{
+  margin-top: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,6 +86,7 @@ div.scroll{
   border-style: solid;
 }
 div.scroll ol{
+  margin-top: 5px;
   padding: 0px;
 }
 div.scroll li{
@@ -89,8 +101,8 @@ div.scroll li{
   font-size: 20px;
   font-family: sans-serif;
   outline: 2px solid black;
-  color: #5c6274;
-  background-color: #F5F0BB;
+  color: #0c532d;
+  background-color: #d0d1cf;
 }
 .response-area{
   text-align: center;
@@ -99,14 +111,29 @@ div.scroll li{
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
 }
 
-.item-list p {
+.item-list p, .item-list del {
   flex-grow: 1;
   margin-right: 10px;
 }
 
 .item-list button {
-  margin-left: 10px;
+  margin-left: 5px;
+  margin-right: 10px
+}
+.tasks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.todo, .done {
+  margin-top: 60px;
+}
+.delete-button, .no{
+  color: rgb(206, 47, 47);
+}
+.complete-button, .yes, .confirm-button{
+  color: rgb(78, 197, 78)
 }

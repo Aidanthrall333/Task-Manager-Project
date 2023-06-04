@@ -26,6 +26,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("list").addEventListener("click", async (event) => {
       const button = event.target;
       if (button.classList.contains("delete-button")) {
+        button.parentElement.children[3].hidden = true;
         button.hidden = true;
 
         /* Creation of new parent of confirm/deconfirm */
@@ -35,14 +36,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         /* Confirm */
         const yes = document.createElement('button');
         yes.style = 'submit';
-        yes.class = 'yes';
-        yes.innerHTML = 'confirm';
+        yes.className = 'yes';
+        yes.innerHTML = `&#x2713;`;
 
         /* Cancel */
         const no = document.createElement('button');
         no.style = 'submit';
-        no.class = 'no';
-        no.innerHTML = 'cancel';
+        no.className = 'no';
+        no.innerHTML = `&#10005;`;
 
         /* Appends no and yes to the new buttons div */
         buttons.appendChild(no);
@@ -84,14 +85,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         /* Confirm */
         const yes = document.createElement('button');
         yes.style = 'submit';
-        yes.class = 'yes';
-        yes.innerHTML = 'confirm';
+        yes.className = 'yes';
+        yes.innerHTML = `&#x2713;`;
 
         /* Cancel */
         const no = document.createElement('button');
         no.style = 'submit';
-        no.class = 'no';
-        no.innerHTML = 'cancel';
+        no.className = 'no';
+        no.innerHTML = `&#10005;`;
 
         /* Appends no and yes to the new buttons div */
         buttons.appendChild(no);
@@ -125,6 +126,8 @@ window.addEventListener("DOMContentLoaded", async () => {
   /* Put Handler for Edit */
   document.getElementById("list").addEventListener("click", async (event) => {
       const button = event.target; // Finds the button clicked
+      button.parentElement.children[1].hidden = true;
+      button.parentElement.children[2].hidden = true;
       button.hidden = true; // Hides it once its pressed
       
       /* Checks if it was the edit button pressed */
@@ -150,8 +153,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         /* Creation of button to confirm edit */
         const confirm = document.createElement('button');
         confirm.type = 'submit';
-        confirm.class = 'confirm-button';
-        confirm.innerText = 'Confirm';
+        confirm.className = 'confirm-button';
+        confirm.innerHTML = `&#x2713;`;
         const toEdit = button.getAttribute("data-id"); // Gets the task's id number
     
         /* Append the input and confirm button to the form element */
@@ -160,13 +163,25 @@ window.addEventListener("DOMContentLoaded", async () => {
     
         
         /* Append the form element to the parent element */
-        button.parentElement.appendChild(form);
+        button.parentElement.children[0].hidden = true;
+        button.parentElement.prepend(form);
         console.log(toEdit);
     
         /* Event Listener for the form submission */
         form.addEventListener('submit', async (event) => {
           event.preventDefault(); 
+          event.stopPropagation();
           const newName = input.value;
+
+          if(newName.length == 0){ // Prevents issue where when the input was empty it would complete the task when you press confirm
+            form.remove();
+            button.hidden = false;
+            button.parentElement.children[0].hidden = false;
+            button.parentElement.children[1].hidden = false;
+            button.parentElement.children[2].hidden = false;
+            return;
+          }
+
           try {
             await newLibrary.put(toEdit, newName);
             console.log('Put correctly');
@@ -175,6 +190,9 @@ window.addEventListener("DOMContentLoaded", async () => {
           } catch (error) {
             console.log('Error putting:', error);
           }
+          button.parentElement.children[0].hidden = false;
+          button.parentElement.children[1].hidden = false;
+          button.parentElement.children[2].hidden = false;
         });
       } else if (button.classList.contains("complete-button")) {
         const toEdit = button.getAttribute("data-id");
@@ -220,8 +238,8 @@ async function GetList() {
       `<li>
           <div class = "item-list">
               <p>${item.name}</p> 
-              <button type = "submit" class="complete-button" data-id = ${item._id}> Complete </button>
-              <button type = "submit" class="delete-button" data-id = ${item._id}> Delete </button>
+              <button type = "submit" class="complete-button" data-id = ${item._id}> &#x2713; </button>
+              <button type = "submit" class="delete-button" data-id = ${item._id}> &#10005; </button>
               <button type = "submit" class="edit-button" data-id = ${item._id}> Edit </button>
           </div>
       </li>`;
@@ -230,8 +248,8 @@ async function GetList() {
           outputC += 
       `<li>
           <div class = "item-list">
-              <p style="color: red">${item.name}</p> 
-              <button type = "submit" class="delete-button" data-id = ${item._id}> Delete </button>
+              <del style="color: red">${item.name}</del> 
+              <button type = "submit" class="delete-button" data-id = ${item._id}> 	&#10005; </button>
           </div>
       </li>`;
       }

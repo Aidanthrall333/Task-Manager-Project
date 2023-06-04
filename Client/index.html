@@ -14,21 +14,27 @@
     </div>
     <div class="response-area" id = "response"></div>
     <form class="form-area">
-      <input type="text"
+      <input 
+      type="text"
       class="list-add"
       placeholder="Enter your task here!"
       name="listitem"
       id="listitem"
       autocomplete="off"
       />
-      <button type="submit" class="add-btn" id = "add">Add</button>
+      <button type="submit" class="add-btn" id = "add">+</button>
     </form>
-    <h3 class="list-title">On my list</h3>
-    <div class="scroll" id = "list">
+    <div class = "tasks">
+      <div class = "todo">
+        <h3 class="list-title">Tasks To Do</h3>
+        <div class="scroll" id = "list"></div>
+      </div>
+      <div class = "done">
+        <h3 class="list-title">Completed Tasks</h3>
+        <div class="scroll" id="completed-list"></div>
+      </div>
     </div>
-    <h3 class="list-title">Completed List</h3>
-    <div class="scroll" id="completed-list">
-    </div>
+    
   </div>
   <script type = "module" src="functions.js"></script>
 </body>

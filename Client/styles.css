@@ -61,15 +61,23 @@ body{
   background-color:#C70000;
   transition-duration: .5s;
 }
-.list-area{
+div.scroll{
   display: flex;
   flex-direction: column;
   align-items: center;
+  /*overflow-x: hidden;*/
+  overflow-y: auto;
+  width: fit-content;
+  height: 150px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #F5F0BB;
+  border-style: solid;
 }
-.list-area ol{
+div.scroll ol{
   padding: 0px;
 }
-.list-area li{
+div.scroll li{
   display: flex;
   flex-direction: column;
   text-align: center;

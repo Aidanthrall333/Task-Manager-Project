@@ -25,23 +25,30 @@ body{
   justify-content: center;
 }
 .list-add{
+  text-align: center;
+  font-family: Arial, sans-serif;
   width: 500px;
   height: 50px;
-  font-size: 40px;
-  color: #5c6274;
-  background-color: #F5F0BB;
+  font-size: 20px;
+  color: #08470e;
+  font-style: oblique;
+  background-color: #d0d1cf;
+
 }
 .input:-webkit-autofill{
   font-size: 40px;
-  color: #5c6274;
+  color: #65745c;
   background-color: #F5F0BB;
 }
 .add-btn{
-  width: 100px;
+  margin-left: 20px;
+  width: 80px;
   font-size: 20px;
   font-weight: bold;
-  color: #549C30;
-  background-color: #EEEEEE;
+  color: white;
+  background-color: green;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 50px;
 }
 .add-btn:hover{
   color:#EEEEEE;
@@ -62,11 +69,13 @@ body{
   transition-duration: .5s;
 }
 .list-area{
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .list-area ol{
+  margin-top: 10px;
   padding: 0px;
 }
 .list-area li{
@@ -81,8 +90,8 @@ body{
   font-size: 20px;
   font-family: sans-serif;
   outline: 2px solid black;
-  color: #5c6274;
-  background-color: #F5F0BB;
+  color: #0c532d;
+  background-color: #d0d1cf;
 }
 .response-area{
   text-align: center;
@@ -102,3 +111,12 @@ body{
 .item-list button {
   margin-left: 10px;
 }
+.tasks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.todo, .done {
+  margin-top: 60px;
+}
+

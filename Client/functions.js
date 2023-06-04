@@ -36,13 +36,13 @@ window.addEventListener("DOMContentLoaded", async () => {
         /* Confirm */
         const yes = document.createElement('button');
         yes.style = 'submit';
-        yes.class = 'yes';
+        yes.className = 'yes';
         yes.innerHTML = `&#x2713;`;
 
         /* Cancel */
         const no = document.createElement('button');
         no.style = 'submit';
-        no.class = 'no';
+        no.className = 'no';
         no.innerHTML = `&#10005;`;
 
         /* Appends no and yes to the new buttons div */
@@ -85,13 +85,13 @@ window.addEventListener("DOMContentLoaded", async () => {
         /* Confirm */
         const yes = document.createElement('button');
         yes.style = 'submit';
-        yes.class = 'yes';
+        yes.className = 'yes';
         yes.innerHTML = `&#x2713;`;
 
         /* Cancel */
         const no = document.createElement('button');
         no.style = 'submit';
-        no.class = 'no';
+        no.className = 'no';
         no.innerHTML = `&#10005;`;
 
         /* Appends no and yes to the new buttons div */
@@ -153,7 +153,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         /* Creation of button to confirm edit */
         const confirm = document.createElement('button');
         confirm.type = 'submit';
-        confirm.class = 'confirm-button';
+        confirm.className = 'confirm-button';
         confirm.innerHTML = `&#x2713;`;
         const toEdit = button.getAttribute("data-id"); // Gets the task's id number
     
@@ -238,8 +238,8 @@ async function GetList() {
       `<li>
           <div class = "item-list">
               <p>${item.name}</p> 
-              <button type = "submit" class="complete-button" data-id = ${item._id}> Complete </button>
-              <button type = "submit" class="delete-button" data-id = ${item._id}> Delete </button>
+              <button type = "submit" class="complete-button" data-id = ${item._id}> &#x2713; </button>
+              <button type = "submit" class="delete-button" data-id = ${item._id}> &#10005; </button>
               <button type = "submit" class="edit-button" data-id = ${item._id}> Edit </button>
           </div>
       </li>`;
@@ -248,8 +248,8 @@ async function GetList() {
           outputC += 
       `<li>
           <div class = "item-list">
-              <del style="color: red">${item.name}</> 
-              <button type = "submit" class="delete-button" data-id = ${item._id}> Delete </button>
+              <del style="color: red">${item.name}</del> 
+              <button type = "submit" class="delete-button" data-id = ${item._id}> 	&#10005; </button>
           </div>
       </li>`;
       }

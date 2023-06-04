@@ -26,45 +26,112 @@ window.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("list").addEventListener("click", async (event) => {
       const button = event.target;
       if (button.classList.contains("delete-button")) {
-        console.log("Deleted element");
-        const toDelete = button.getAttribute("data-id");
-        console.log(toDelete);
-        try {
-          await newLibrary.delete(toDelete);
-        } catch (err) {
-          console.log("Delete did not work: ", err);
-        }
-        GetList()
+        button.hidden = true;
+
+        /* Creation of new parent of confirm/deconfirm */
+        const buttons = document.createElement('div');
+        button.parentElement.appendChild(buttons);
+
+        /* Confirm */
+        const yes = document.createElement('button');
+        yes.style = 'submit';
+        yes.class = 'yes';
+        yes.innerHTML = 'confirm';
+
+        /* Cancel */
+        const no = document.createElement('button');
+        no.style = 'submit';
+        no.class = 'no';
+        no.innerHTML = 'cancel';
+
+        /* Appends no and yes to the new buttons div */
+        buttons.appendChild(no);
+        buttons.appendChild(yes);
+
+        /* Event handler for yes (confirm) */
+        yes.addEventListener('click', async (event) => {
+          console.log("Deleted element");
+          const toDelete = button.getAttribute("data-id");
+          console.log(toDelete);
+          try {
+            await newLibrary.delete(toDelete);
+          } 
+          catch (err) {
+            console.log("Delete did not work: ", err);
+          }
+          buttons.remove();
+          button.hidden = false;
+          GetList()
+        });
+
+        /* Event handler for no (cancel) */
+        no.addEventListener('click', async (event) => {
+          buttons.remove();
+          button.hidden = false;
+          GetList();
+        });
       }
     });
     document.getElementById("completed-list").addEventListener("click", async (event) => {
       const button = event.target;
       if (button.classList.contains("delete-button")) {
-        console.log("Deleted element");
-        const toDelete = button.getAttribute("data-id");
-        console.log(toDelete);
-        try {
-          await newLibrary.delete(toDelete);
-        } catch (err) {
-          console.log("Delete did not work: ", err);
-        }
-        GetList()
+        button.hidden = true;
+
+        /* Creation of new parent of confirm/deconfirm */
+        const buttons = document.createElement('div');
+        button.parentElement.appendChild(buttons);
+
+        /* Confirm */
+        const yes = document.createElement('button');
+        yes.style = 'submit';
+        yes.class = 'yes';
+        yes.innerHTML = 'confirm';
+
+        /* Cancel */
+        const no = document.createElement('button');
+        no.style = 'submit';
+        no.class = 'no';
+        no.innerHTML = 'cancel';
+
+        /* Appends no and yes to the new buttons div */
+        buttons.appendChild(no);
+        buttons.appendChild(yes);
+
+        /* Event handler for yes (confirm) */
+        yes.addEventListener('click', async (event) => {
+          console.log("Deleted element");
+          const toDelete = button.getAttribute("data-id");
+          console.log(toDelete);
+          try {
+            await newLibrary.delete(toDelete);
+          } 
+          catch (err) {
+            console.log("Delete did not work: ", err);
+          }
+          buttons.remove();
+          button.hidden = false;
+          GetList()
+        });
+
+        /* Event handler for no (cancel) */
+        no.addEventListener('click', async (event) => {
+          buttons.remove();
+          button.hidden = false;
+          GetList();
+        });
       }
     });
 
   /* Put Handler for Edit */
   document.getElementById("list").addEventListener("click", async (event) => {
-      const button = event.target;
-      button.hidden = true;
+      const button = event.target; // Finds the button clicked
+      button.hidden = true; // Hides it once its pressed
       
-      /* Checks if the button.classList */
+      /* Checks if it was the edit button pressed */
       if (button.classList.contains("edit-button")) {
         event.preventDefault();
         console.log("Began editing element");
     
-        /* Creation of parent div element */
-        const div= document.createElement('div');
-        div.classList.add('edit-container');
     
         /* Creation of new input element to edit name */
         const input = document.createElement('input');
@@ -78,6 +145,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     
         /* Creation of form element */
         const form = document.createElement('form');
+        form.classList.add('edit-container')
     
         /* Creation of button to confirm edit */
         const confirm = document.createElement('button');
@@ -90,12 +158,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         form.appendChild(input);
         form.appendChild(confirm);
     
-        /* Append the form element to the recently created div element */
-        div.appendChild(form);
-    
-        /* Append the div element to the parent element */
-        const parentElement = button.parentElement;
-        parentElement.appendChild(div);
+        
+        /* Append the form element to the parent element */
+        button.parentElement.appendChild(form);
         console.log(toEdit);
     
         /* Event Listener for the form submission */
@@ -110,8 +175,6 @@ window.addEventListener("DOMContentLoaded", async () => {
           } catch (error) {
             console.log('Error putting:', error);
           }
-          /* Remove the div element */
-          parentElement.removeChild(div);
         });
       } else if (button.classList.contains("complete-button")) {
         const toEdit = button.getAttribute("data-id");

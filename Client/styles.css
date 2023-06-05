@@ -83,6 +83,7 @@ div.scroll{
   padding-bottom: 30px;
   background-color: #F5F0BB;
   border-style: solid;
+  border-radius: 25px;
 }
 div.scroll ol{
   margin-top: 5px;

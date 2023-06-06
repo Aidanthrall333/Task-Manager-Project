@@ -23,6 +23,7 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: center;
+  padding-bottom: 10px;
 }
 .list-add{
   width: 500px;
@@ -63,42 +64,28 @@ body{
 }
 .list-area{
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items:center;
+  justify-content:space-evenly;
 }
-.list-area ol{
-  padding: 0px;
-}
-.list-area li{
+.to-do-list{
   display: flex;
   flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  width: 500px;
-  height: 50px;
-  margin: 5px;
-  border-radius: 10px;
-  font-size: 20px;
-  font-family: sans-serif;
-  outline: 2px solid black;
-  color: #5c6274;
-  background-color: #F5F0BB;
+  align-items:center;
+  height: 500px;
+  width:40%;
+  border: 3px solid black;
+
+}
+.completed-list{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  height: 500px;
+  width:40%;
+  border: 3px solid black;
 }
 .response-area{
   text-align: center;
 }
-.item-list {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
 
-.item-list p {
-  flex-grow: 1;
-  margin-right: 10px;
-}
-
-.item-list button {
-  margin-left: 10px;
-}
